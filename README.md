@@ -10,3 +10,11 @@ Just add the preset that you want to add to your `extends`:
   "extends": [ "github>skayo/renovate-presets:<name of the preset>" ]
 }
 ````
+
+## Example
+
+```json
+{
+  "extends": [ "github>skayo/renovate-presets:base" ]
+}
+````
