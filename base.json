@@ -4,6 +4,8 @@
 	"extends": [
 		"config:base",
 		"helpers:pinGitHubActionDigests",
+		"docker:enableMajor",
+		"docker:pinDigests",
 		":semanticCommits",
 		":reviewer(skayo)",
 		":assignee(skayo)",
