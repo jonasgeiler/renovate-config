@@ -7,7 +7,7 @@
 		"docker:enableMajor",
 		"docker:pinDigests",
 		":automergeDigest",
-		":automergePatch",
+		":automergeMinor",
 		":automergeBranch",
 		":semanticCommits",
 		":reviewer(skayo)",
