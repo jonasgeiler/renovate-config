@@ -1,20 +1,20 @@
 # Renovate Presets
 
-This repository contains common presets for [Renovate Bot](https://renovatebot.com/) that I use in other repositories.
+This repository contains common presets for [Mend Renovate](https://www.mend.io/renovate/) that I use in my repositories.
 
 ## Usage
 
-Just add the preset that you want to add to your `extends`:
+Just add the preset that you want to add to your `extends` field in the `renovate.json` file:
 ```json
 {
-  "extends": [ "github>skayo/renovate-presets:<name of the preset>" ]
+  "extends": [ "github>jonasgeiler/renovate-presets:<name of the preset>" ]
 }
 ````
 
-## Example
+### Example
 
 ```json
 {
-  "extends": [ "github>skayo/renovate-presets:base" ]
+  "extends": [ "github>jonasgeiler/renovate-presets:base" ]
 }
 ````
