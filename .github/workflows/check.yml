@@ -8,9 +8,14 @@ on:
 
 jobs:
   check:
+    name: Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.1.1
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
 
       - name: Run renovate config validator
-        run: npx --yes --package renovate -- renovate-config-validator
+        run: |
+          npx --yes --package renovate -- renovate-config-validator --strict \
+            ./base.json \
+            ./yaml-comment.json
