@@ -2,16 +2,25 @@
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"description": "Base config",
 	"extends": [
-		"config:base",
-		"helpers:pinGitHubActionDigests",
-		"docker:enableMajor",
-		"docker:pinDigests",
-		":automergeDigest",
-		":automergeMinor",
+		"config:best-practices",
+		":disableDigestUpdates",
+		"npm:unpublishSafe",
+
+		":timezone(Europe/Vienna)",
+		"schedule:weekly",
+
 		":automergeBranch",
+		":automergePatch",
+		":automergeLinters",
+		":automergeTesters",
+		":automergeTypes",
+		"schedule:automergeDaily",
+
 		":semanticCommits",
-		":reviewer(skayo)",
-		":assignee(skayo)",
-		":label(dependencies)"
+		":gitSignOff",
+
+		":assignAndReview(jonasgeiler)",
+		":label(dependencies)",
+		":enableVulnerabilityAlertsWithLabel(security)"
 	]
 }
