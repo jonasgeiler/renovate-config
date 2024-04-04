@@ -6,6 +6,7 @@ on:
     branches:
       - main
     paths:
+      - .github/workflows/check.yml
       - default.json
       - yaml-comment.json
 
@@ -13,6 +14,7 @@ on:
     branches:
       - main
     paths:
+      - .github/workflows/check.yml
       - default.json
       - yaml-comment.json
 
