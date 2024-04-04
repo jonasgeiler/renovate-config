@@ -3,6 +3,7 @@
 	"description": "Used to manage versions in YAML values as specified in a special comment. Usage: `somekey: <current-version> # renovate: datasource=<datasource> depName=<dependency-name> [versioning=<versioning>]`",
 	"regexManagers": [
 		{
+			"customType": "regex",
 			"fileMatch": [
 				"\\.ya?ml$"
 			],
