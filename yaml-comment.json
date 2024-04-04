@@ -8,7 +8,7 @@
 				"\\.ya?ml$"
 			],
 			"matchStrings": [
-				": *[\"']?(?<currentValue>.+?)[\"']? *# *renovate(?:bot)?: +datasource=(?<datasource>.+?) +depName=(?<depName>.+?)(?: +versioning=(?<versioning>.+?))?\\s"
+				": *[\"']?(?<currentValue>.+?)[\"']? *# *renovate(?:bot)?: *datasource=(?<datasource>[a-zA-Z0-9-]+) +depName=(?<depName>[^\\s]+)(?: +versioning=(?<versioning>[a-zA-Z0-9-]+))?"
 			],
 			"versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
 		}
