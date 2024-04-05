@@ -6,6 +6,13 @@
 		":disableDigestUpdates",
 		"npm:unpublishSafe",
 
+		"regexManagers:dockerfileVersions",
+		"regexManagers:githubActionsVersions",
+		"regexManagers:gitlabPipelineVersions",
+		"regexManagers:helmChartYamlAppVersions",
+		"regexManagers:mavenPropertyVersions",
+		"regexManagers:tfvarsVersions",
+
 		":timezone(Europe/Vienna)",
 		"schedule:weekly",
 
