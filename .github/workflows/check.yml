@@ -33,8 +33,8 @@ jobs:
         run: |
           shopt -s nullglob
           configs=(*.json *.json5)
-          if [[ "${#configs[@]}" -gt 0 ]]; then
-            npx --yes --package renovate -- renovate-config-validator --strict "${configs[@]}"
-          else
+          if [[ "${#configs[@]}" -eq 0 ]]; then
+            echo "No configs found"
             exit 1
           fi
+          npx --yes --package renovate -- renovate-config-validator --strict "${configs[@]}"
