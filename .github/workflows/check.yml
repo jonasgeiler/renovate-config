@@ -32,9 +32,9 @@ jobs:
       - name: Run renovate-config-validator
         run: |
           shopt -s nullglob
-          paths=(*.json *.json5)
-          if [[ "${#paths[@]}" -gt 0 ]]; then
-            npx --yes --package renovate -- renovate-config-validator --strict "${paths[@]}"
+          configs=(*.json *.json5)
+          if [[ "${#configs[@]}" -gt 0 ]]; then
+            npx --yes --package renovate -- renovate-config-validator --strict "${configs[@]}"
           else
             exit 1
           end
