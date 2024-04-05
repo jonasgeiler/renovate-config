@@ -7,16 +7,14 @@ on:
       - main
     paths:
       - .github/workflows/check.yml
-      - default.json
-      - yaml-version-comments.json
+      - '*.json5?'
 
   pull_request:
     branches:
       - main
     paths:
       - .github/workflows/check.yml
-      - default.json
-      - yaml-version-comments.json
+      - '*.json5?'
 
   schedule:
     - cron: '0 13 * * 1'
@@ -34,7 +32,6 @@ jobs:
 
       - name: Run renovate-config-validator
         run: |
-          cat thisisatestignoreme
-          npx --yes --package renovate -- renovate-config-validator --strict \
-            default.json \
-            yaml-version-comments.json
+          shopt -s nullglob
+          paths=(*.json *.json5)
+          npx --yes --package renovate -- renovate-config-validator --strict "${paths[@]}"
