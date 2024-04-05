@@ -9,7 +9,9 @@ The onboarding PR created by Renovate should already suggest a config file simil
 ```json
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>jonasgeiler/renovate-config"]
+  "extends": [
+    "local>jonasgeiler/renovate-config"
+  ]
 }
 ```
 If not, create it manually and store it under `renovate.json` or `.github/renovate.json` or [one of the other supported locations](https://docs.renovatebot.com/configuration-options/).
