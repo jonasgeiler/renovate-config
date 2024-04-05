@@ -1,6 +1,6 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"description": "Base config with best practices and some opioniated/personal addtions",
+	"description": "Preset with base config, best practices and some opioniated/personal addtions",
 	"extends": [
 		"config:best-practices",
 		":disableDigestUpdates",
