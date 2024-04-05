@@ -33,4 +33,8 @@ jobs:
         run: |
           shopt -s nullglob
           paths=(*.json *.json5)
-          npx --yes --package renovate -- renovate-config-validator --strict "${paths[@]}"
+          if [[ "${#paths[@]}" -gt 0 ]]; then
+            npx --yes --package renovate -- renovate-config-validator --strict "${paths[@]}"
+          else
+            exit 1
+          end
