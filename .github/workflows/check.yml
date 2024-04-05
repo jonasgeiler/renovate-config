@@ -34,6 +34,7 @@ jobs:
 
       - name: Run renovate-config-validator
         run: |
+          cat thisisatestignoreme
           npx --yes --package renovate -- renovate-config-validator --strict \
             default.json \
             yaml-version-comments.json
