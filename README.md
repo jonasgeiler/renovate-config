@@ -34,7 +34,7 @@ For example:
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>jonasgeiler/renovate-config",
-    "github>jonasgeiler/renovate-config:yaml-comment"
+    "github>jonasgeiler/renovate-config:yaml-version-comments"
   ]
 }
 ````
