@@ -10,7 +10,7 @@ The onboarding PR created by Renovate should already suggest a config file simil
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "local>jonasgeiler/renovate-config"
+    "github>jonasgeiler/renovate-config"
   ]
 }
 ```
