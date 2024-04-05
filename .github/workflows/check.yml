@@ -37,4 +37,4 @@ jobs:
             npx --yes --package renovate -- renovate-config-validator --strict "${configs[@]}"
           else
             exit 1
-          end
+          fi
