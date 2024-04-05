@@ -1,6 +1,6 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"description": "Used to manage versions in YAML values as specified in a special comment. Usage: `somekey: <current-version> # renovate: datasource=<datasource> depName=<dependency-name> [versioning=<versioning>]`",
+	"description": "Manage version values in YAML files as specified by special comments. Usage: `somekey: <current-version> # renovate: datasource=<data-source> depName=<dependency-name> [versioning=<versioning-scheme>]`",
 	"customManagers": [
 		{
 			"customType": "regex",
