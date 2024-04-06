@@ -3,7 +3,6 @@
 	"description": "Preset with base configuration, best practices and some custom/personal additions.",
 	"extends": [
 		"config:best-practices",
-		":disableDigestUpdates",
 		"npm:unpublishSafe",
 
 		"regexManagers:dockerfileVersions",
