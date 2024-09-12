@@ -6,35 +6,40 @@ on:
       - main
       - 'renovate/**'
     paths:
-      - .github/workflows/check.yml
       - '*.json5?'
 
   pull_request:
     branches:
       - main
     paths:
-      - .github/workflows/check.yml
       - '*.json5?'
 
   schedule:
     - cron: '0 13 * * 1'
 
   workflow_dispatch:
+  workflow_call:
 
 jobs:
   validate-renovate-config:
     name: Validate Renovate Config
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
-      - name: Run renovate-config-validator
+      - name: Run renovate-config-validator on JSON files
         run: |
+          IFS=$' \t\n'; set -euxo pipefail
+
+          # get files
           shopt -s nullglob
-          configs=(*.json *.json5)
-          if [[ "${#configs[@]}" -eq 0 ]]; then
-            echo "No configs found"
+          files=(*.json *.json5)
+          if [[ "${#files[@]}" -eq 0 ]]; then
+            echo "No files found"
             exit 1
           fi
-          npx --yes --package renovate -- renovate-config-validator --strict "${configs[@]}"
+
+          # download, install and run renovate-config-validator
+          npx --yes --package renovate -- renovate-config-validator --strict "${files[@]}"
