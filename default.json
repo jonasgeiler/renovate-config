@@ -1,34 +1,45 @@
 {
-	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"description": "Preset with base configuration, best practices and some custom/personal additions.",
-	"extends": [
-		"config:best-practices",
-		"npm:unpublishSafe",
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Preset with base configuration, best practices and some custom/personal additions.",
+  "extends": [
+    "config:best-practices",
+    "npm:unpublishSafe",
 
-		"customManagers:biomeVersions",
-		"customManagers:bitbucketPipelinesVersions",
-		"customManagers:dockerfileVersions",
-		"customManagers:githubActionsVersions",
-		"customManagers:gitlabPipelineVersions",
-		"customManagers:helmChartYamlAppVersions",
-		"customManagers:mavenPropertyVersions",
-		"customManagers:tfvarsVersions",
+    "customManagers:biomeVersions",
+    "customManagers:bitbucketPipelinesVersions",
+    "customManagers:dockerfileVersions",
+    "customManagers:githubActionsVersions",
+    "customManagers:gitlabPipelineVersions",
+    "customManagers:helmChartYamlAppVersions",
+    "customManagers:mavenPropertyVersions",
+    "customManagers:tfvarsVersions",
 
-		":timezone(Europe/Vienna)",
-		"schedule:weekly",
+    ":timezone(Europe/Vienna)",
+    "schedule:weekly",
 
-		":automergeBranch",
-		":automergePatch",
-		":automergeLinters",
-		":automergeTesters",
-		":automergeTypes",
-		"schedule:automergeDaily",
+    ":automergeBranch",
+    ":automergePatch",
+    ":automergeLinters",
+    ":automergeTesters",
+    ":automergeTypes",
+    "schedule:automergeDaily",
 
-		":semanticCommits",
-		":gitSignOff",
+    ":semanticCommits",
+    ":gitSignOff",
 
-		":reviewer(jonasgeiler)",
-		":label(dependencies)",
-		":enableVulnerabilityAlertsWithLabel(security)"
-	]
+    ":reviewer(jonasgeiler)",
+    ":label(dependencies)",
+    ":enableVulnerabilityAlertsWithLabel(security)"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "(^|/)PKGBUILD$"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: (?:lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\s+pkgver\\s*=\\s*[\"']?(?<currentValue>.+?)[\"']?\\s"
+      ]
+    }
+  ]
 }
