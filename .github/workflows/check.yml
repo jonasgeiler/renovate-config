@@ -31,7 +31,7 @@ jobs:
 
       - name: Run renovate-config-validator on JSON files
         run: |
-          IFS=$' \t\n'; set -euxo pipefail
+          IFS=$' \n\t'; set -euxo pipefail
 
           # get files
           shopt -s nullglob
