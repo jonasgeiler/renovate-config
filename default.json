@@ -11,6 +11,7 @@
     "customManagers:githubActionsVersions",
     "customManagers:gitlabPipelineVersions",
     "customManagers:helmChartYamlAppVersions",
+    "customManagers:makefileVersions",
     "customManagers:mavenPropertyVersions",
     "customManagers:tfvarsVersions",
 
