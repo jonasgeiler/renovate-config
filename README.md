@@ -12,7 +12,8 @@ easier config sharing I have decided to use it in favor of Dependabot.
 
 ## Usage
 
-The onboarding PR created by Renovate should already suggest a config file
+When you give the Renovate GitHub App access to a new repository,
+the onboarding PR created by Renovate should already suggest a config file
 similar to the following:
 
 ```json
