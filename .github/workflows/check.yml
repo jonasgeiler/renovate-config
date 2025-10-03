@@ -3,43 +3,126 @@ name: Check
 on:
   push:
     branches:
-      - main
-      - 'renovate/**'
+      - renovate/**
     paths:
+      # "renovate" group:
       - '*.json5?'
+
+      # "actionlint" group:
+      - .github/workflows/*.ya?ml
 
   pull_request:
     branches:
       - main
     paths:
+      # "renovate" group:
       - '*.json5?'
 
-  schedule:
-    - cron: '0 13 * * 1'
+      # "actionlint" group:
+      - .github/workflows/*.ya?ml
 
-  workflow_dispatch:
   workflow_call:
+  workflow_dispatch:
 
 jobs:
-  validate-renovate-config:
-    name: Validate Renovate Config
+  check:
+    name: Check
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
 
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: ${{ github.event_name == 'push' && '0' || '1' }}
 
-      - name: Run renovate-config-validator on JSON files
+      - name: Get changed files
+        id: changed-files
+        if: github.event_name != 'workflow_dispatch'
+        uses: tj-actions/changed-files@a284dc1814e3fd07f2e34267fc8f81227ed29fb8 # v45.0.9
+        with:
+          files_yaml: |
+            renovate:
+              - '*.{json,json5}'
+
+            actionlint:
+              - .github/workflows/*.{yml,yaml}
+
+      - name: Check Renovate config files using renovate-config-validator
+        if: |
+          github.event_name == 'workflow_dispatch' ||
+          steps.changed-files.outputs.renovate_any_changed == 'true'
+        env:
+          RENOVATE_ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.renovate_all_changed_files }}
         run: |
-          IFS=$' \n\t'; set -euxo pipefail
+          IFS=$' \n\t'; set -ux
 
-          # get files
-          shopt -s nullglob
-          files=(*.json *.json5)
-          if [[ "${#files[@]}" -eq 0 ]]; then
-            echo "No files found"
-            exit 1
+          if [[ "${GITHUB_EVENT_NAME}" == 'workflow_dispatch' ]]; then
+            # Get files using globs.
+            shopt -s nullglob globstar
+            files=(*.{json,json5})
+            shopt -u nullglob globstar
+
+            # Check if files were found.
+            if [[ "${#files[@]}" -eq 0 ]]; then
+              : "No files found"
+              exit 1
+            fi
+          else
+            # Get files using changed files output.
+            files=()
+            for file in ${RENOVATE_ALL_CHANGED_FILES}; do
+              files+=("${file}")
+            done
           fi
+          : "Files to check: ${files[*]}"
 
-          # download, install and run renovate-config-validator
+          # Download and run renovate-config-validator
           npx --yes --package renovate -- renovate-config-validator --strict "${files[@]}"
+
+      - name: Check GitHub Actions workflows using actionlint
+        if: |
+          github.event_name == 'workflow_dispatch' ||
+          steps.changed-files.outputs.actionlint_any_changed == 'true'
+        env:
+          # renovate: datasource=github-releases depName=rhysd/actionlint
+          ACTIONLINT_VERSION: v1.7.7
+          ACTIONLINT_ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.actionlint_all_changed_files }}
+        run: |
+          IFS=$' \n\t'; set -ux
+
+          if [[ "${GITHUB_EVENT_NAME}" == 'workflow_dispatch' ]]; then
+            # Get files using globs.
+            shopt -s nullglob globstar
+            files=(.github/workflows/*.{yml,yaml})
+            shopt -u nullglob globstar
+
+            # Check if files were found.
+            if [[ "${#files[@]}" -eq 0 ]]; then
+              : "No files found"
+              exit 1
+            fi
+          else
+            # Get files using changed files output.
+            files=()
+            for file in ${ACTIONLINT_ALL_CHANGED_FILES}; do
+              files+=("${file}")
+            done
+          fi
+          : "Files to check: ${files[*]}"
+
+          # Download, extract and setup actionlint.
+          wget -q "https://github.com/rhysd/actionlint/releases/download/${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION#v}_linux_amd64.tar.gz" \
+            -O actionlint.tar.gz
+          tar -xzf actionlint.tar.gz
+          chmod +x actionlint
+
+          # Download and setup problem matcher for actionlint.
+          wget -q "https://raw.githubusercontent.com/rhysd/actionlint/${ACTIONLINT_VERSION}/.github/actionlint-matcher.json" \
+            -O actionlint-problem-matcher.json
+          echo "::add-matcher::actionlint-problem-matcher.json"
+
+          # Run actionlint.
+          ./actionlint -verbose -color "${files[@]}"
