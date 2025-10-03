@@ -5,6 +5,7 @@
     "config:best-practices",
     "npm:unpublishSafe",
 
+    "customManagers:azurePipelinesVersions",
     "customManagers:biomeVersions",
     "customManagers:bitbucketPipelinesVersions",
     "customManagers:dockerfileVersions",
