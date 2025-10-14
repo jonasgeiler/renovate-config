@@ -3,7 +3,23 @@
   "description": "Preset with base configuration, best practices and some custom/personal additions.",
   "extends": [
     "config:best-practices",
-    "npm:unpublishSafe",
+
+    ":semanticCommits",
+    ":gitSignOff",
+    ":reviewer(jonasgeiler)",
+    ":label(dependencies)",
+
+    "security:minimumReleaseAgeNpm",
+
+    "schedule:weekly",
+    ":timezone(Europe/Vienna)",
+
+    "schedule:automergeDaily",
+    ":automergeBranch",
+    ":automergeLinters",
+    ":automergePatch",
+    ":automergeTesters",
+    ":automergeTypes",
 
     "customManagers:azurePipelinesVersions",
     "customManagers:biomeVersions",
@@ -14,23 +30,7 @@
     "customManagers:helmChartYamlAppVersions",
     "customManagers:makefileVersions",
     "customManagers:mavenPropertyVersions",
-    "customManagers:tfvarsVersions",
-
-    ":timezone(Europe/Vienna)",
-    "schedule:weekly",
-
-    ":automergeBranch",
-    ":automergePatch",
-    ":automergeLinters",
-    ":automergeTesters",
-    ":automergeTypes",
-    "schedule:automergeDaily",
-
-    ":semanticCommits",
-    ":gitSignOff",
-
-    ":reviewer(jonasgeiler)",
-    ":label(dependencies)"
+    "customManagers:tfvarsVersions"
   ],
   "vulnerabilityAlerts": {
     "enabled": true,
