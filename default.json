@@ -10,6 +10,7 @@
     ":label(dependencies)",
 
     "security:minimumReleaseAgeNpm",
+    ":enableVulnerabilityAlertsWithAdditionalLabel(security)",
 
     "schedule:weekly",
     ":timezone(Europe/Vienna)",
@@ -32,12 +33,6 @@
     "customManagers:mavenPropertyVersions",
     "customManagers:tfvarsVersions"
   ],
-  "vulnerabilityAlerts": {
-    "enabled": true,
-    "addLabels": [
-      "security"
-    ]
-  },
   "customManagers": [
     {
       "customType": "regex",
