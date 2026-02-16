@@ -89,7 +89,7 @@ jobs:
           steps.changed-files.outputs.actionlint_any_changed == 'true'
         env:
           # renovate: datasource=github-releases depName=rhysd/actionlint
-          ACTIONLINT_VERSION: v1.7.10
+          ACTIONLINT_VERSION: v1.7.11
           ACTIONLINT_ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.actionlint_all_changed_files }}
         run: |
           IFS=$' \n\t'; set -ux
