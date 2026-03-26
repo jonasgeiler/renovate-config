@@ -33,9 +33,6 @@
     "customManagers:mavenPropertyVersions",
     "customManagers:tfvarsVersions"
   ],
-  "registryAliases": {
-    "dhi.io": "dhi.io"
-  },
   "customManagers": [
     {
       "customType": "regex",
