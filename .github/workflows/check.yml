@@ -17,6 +17,10 @@ on:
   workflow_call:
   workflow_dispatch:
 
+  schedule:
+    # Also run the check every month.
+    - cron: '0 0 1 * *'
+
 jobs:
   code-quality:
     name: Code Quality
