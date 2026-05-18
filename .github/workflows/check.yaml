@@ -8,11 +8,15 @@ on:
     paths:
       - '*.json5?'
 
+      - '.github/workflows/check.yaml'
+
   pull_request:
     branches:
       - main
     paths:
       - '*.json5?'
+
+      - '.github/workflows/check.yaml'
 
   workflow_call:
   workflow_dispatch:
