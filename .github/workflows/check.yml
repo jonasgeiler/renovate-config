@@ -42,6 +42,6 @@ jobs:
           shopt -s dotglob globstar nullglob
 
           # Download and run renovate-config-validator
-          npx --yes --package renovate -- renovate-config-validator --strict -- \
-            *.json \
-            *.json5
+          npx --yes --package renovate -- renovate-config-validator --strict \
+            ./*.json \
+            ./*.json5
