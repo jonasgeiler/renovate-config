@@ -52,5 +52,16 @@
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}exact{{/if}}"
     }
+  ],
+  "packageRules": [
+    {
+      "matchDepNames": "jonasgeiler/.github",
+      "matchManagers": "github-actions",
+      "matchDatasources": "github-digest",
+      "matchDepTypes": "action",
+      "matchCurrentValue": "main",
+      "matchFileNames": ["/^.github\\/workflows\\/.*\\.ya?ml$/"],
+      "enabled": false
+    }
   ]
 }
