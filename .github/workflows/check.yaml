@@ -8,7 +8,7 @@ on:
     paths:
       - '*.json5?'
 
-      - '.github/workflows/check.yaml'
+      - '.github/workflows/check.ya?ml'
 
   pull_request:
     branches:
@@ -16,7 +16,7 @@ on:
     paths:
       - '*.json5?'
 
-      - '.github/workflows/check.yaml'
+      - '.github/workflows/check.ya?ml'
 
   workflow_call:
   workflow_dispatch:
